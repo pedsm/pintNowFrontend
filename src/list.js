@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Icon from 'material-ui/Icon';
+import Divider from 'material-ui/Divider';
 
-export default class List extends React.Component {
+export default class PubList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -17,24 +21,26 @@ export default class List extends React.Component {
 
     render() {
         return (
-            <div style={styles.main}>
+            <List style={styles.main}>
                 {this.state.pubs.map((pub, i) => (
-                    <div key={i} style={styles.pubListing}>
-                        <h3>{pub.name}</h3>
-                        <p style={{float:'right'}}>£2</p>
-                        <p>{pub.address}</p>
-                        <p>{pub.postcode}</p>
-                    </div>
+                    <Fragment key={i}>
+                        <ListItem>
+                            <Avatar>
+                                <Icon style={{ fontSize: 30 }}>directions_run</Icon>
+                            </Avatar>
+                            <ListItemText primary={pub.name} secondary={'£2'} />
+                        </ListItem>
+                        <Divider inset component="li" />
+                    </Fragment>
                 ))}
-            </div>
+            </List>
         )
     }
 }
 
 const styles = {
     main: {
-        maxHeight: 300,
-        overflow: 'scroll'
+        overflowY: 'scroll'
     },
     pubListing: {
         margin: 0,

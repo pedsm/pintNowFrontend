@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import Map from './map'
 import List from './list'
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 
 class App extends React.Component { 
     constructor(props) {
@@ -9,13 +11,15 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div>
-                <header>
-                    <h1>PintNow</h1>
-                </header>
+            <Fragment>
+                <AppBar position="static">
+                    <Toolbar>
+                        <h1>PintNow</h1>
+                    </Toolbar>
+                </AppBar>
                 <Map />
                 <List data={[]}/>
-            </div>
+            </Fragment>
         )
     }
 }
