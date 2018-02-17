@@ -3,11 +3,22 @@ import { withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 export default class CustomMap extends React.Component {
     render() {
+        const {pubs, position} = this.props
         const Map = withGoogleMap((props) =>
             <GoogleMap
-                defaultZoom={8}
-                defaultCenter={{ lat: -34.397, lng: 150.644 }}
+                defaultZoom={14}
+                defaultCenter={{ lat: position.lat, lng: position.lon}}
             >
+                {pubs.map((pub, i) => {
+                    const pos = pub.location.split(',').map(a => parseFloat(a))
+                    const objPos = {lat: pos[0], lng: pos[1]} 
+                    return <Marker 
+                        position={objPos} 
+                        title={pub.name} 
+                        clickable={true}
+                        key={i} 
+                        />
+                })}
             </GoogleMap>)
         return (
             <Map
@@ -17,4 +28,3 @@ export default class CustomMap extends React.Component {
         )
     }
 }
-                // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwMLCQoQ87aUbk-r7HXxtVXnTnx0ocnuY&callback=initMap"

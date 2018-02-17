@@ -9,7 +9,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            "pubs": [], 
+            pubs: [], 
             position: {
                 lat: 0,
                 lon: 0
@@ -26,21 +26,26 @@ class App extends React.Component {
                         lat: latitude,
                         lon: longitude
                     }
-                    fetch(`http://localhost:8080/pubs?lat=${latitude}&lon=${longitude}`)
-                        .then(data => {
-                            console.log(data)
-                            return data.json()
-                        })
-                        .then((json) => {
-                            console.log(json)
-                        })
-                        .catch(err => console.error(err))
+                    this.fetchPubs(latitude, longitude)
+                    console.log('Updated position')
                     return state
                 })
               });
         } else {
             /* geolocation IS NOT available */
         }
+    }
+
+    async fetchPubs(lat, lon) {
+        const data = await fetch(`http://localhost:8080/pubs?lat=${lat}&lon=${lon}`)
+        const json = await data.json()
+        this.setState((prev, props) => {
+            const state = Object.assign(prev)
+            state.pubs = json
+            console.log('Updated pubs')
+            return state
+        })
+
     }
     render() {
         return (
