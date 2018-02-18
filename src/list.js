@@ -24,7 +24,7 @@ export default class PubList extends React.Component {
                             <Avatar>
                                 <Icon style={{ fontSize: 30 }}>{this.chooseIcon(pub.distance)}</Icon>
                             </Avatar>
-                            <ListItemText primary={pub.name} secondary={`£${(pub.pricePence/100).toFixed(2)}`} />
+                            <ListItemText primary={pub.name} secondary={pub.pricePence !== 0 ? 'Not enough data' :`£${(pub.pricePence / 100).toFixed(2)}`} />
                         </ListItem>
                         <Divider inset component="li" />
                     </Fragment>

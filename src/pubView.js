@@ -17,7 +17,7 @@ export default class PubView extends React.Component {
                 <DialogTitle id="alert-dialog-slide-title" children={pub.name} />
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Pint price: £{(pub.pricePence / 100).toFixed(2)}<br />
+                        Pint price: {pub.pricePence !== 0 ? 'Not enough data' :`£${(pub.pricePence / 100).toFixed(2)}`}<br />
                         Address: {pub.address}<br />
                         Postcode: {pub.postcode}<br />
                         Distance: {this.prettyDistance(pub.distance)}<br />
