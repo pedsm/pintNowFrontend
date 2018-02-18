@@ -63,7 +63,7 @@ class App extends React.Component {
     }
 
     async fetchPubs(lat, lon) {
-        const data = await fetch(`http://localhost:8080/pubs?lat=${lat}&lon=${lon}&num=${50}`)
+        const data = await fetch(`http://localhost:3000/pubs?lat=${lat}&lon=${lon}&num=${50}`)
         const json = await data.json()
         this.setState((prev, props) => {
             const state = Object.assign(prev)
