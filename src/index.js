@@ -104,7 +104,7 @@ class App extends React.Component {
         return (
             <Fragment>
                 <PubView show={this.state.showModal} close={this.closeModal.bind(this)} pub={this.state.currentPub} />
-                {this.state.pubs.length > 0 ? <PubForm show={this.state.showForm} close={this.closeForm.bind(this)} pub={this.state.pubs[0]} /> : <span />}
+                {this.state.pubs.length > 0 ? <PubForm refresh={this.updateAll.bind(this)} show={this.state.showForm} close={this.closeForm.bind(this)} pub={this.state.pubs[0]} /> : <span />}
                 <AppBar position="static">
                     <Toolbar>
                         <h1>PintNow</h1>

@@ -46,6 +46,7 @@ export default class PubForm extends React.Component {
                     body: JSON.stringify(body)
                 })
                 console.log(await res.json())
+                this.props.refresh()
                 this.closeModal.bind(this)()
             } catch (e) {
                 console.error(e)
