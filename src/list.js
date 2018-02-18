@@ -5,20 +5,30 @@ import Icon from 'material-ui/Icon';
 import Divider from 'material-ui/Divider';
 
 export default class PubList extends React.Component {
+    chooseIcon(distance) {
+        if(distance < 1.5) {
+            return "directions_run"
+        }else if(distance < 3.0){
+            return "directions_bus"
+        }else if(distance < 10.0){
+            return "directions_car"
+        }
+        return "airplanemode_active"
+    }
     render() {
         return (
             <List style={styles.main}>
-                {this.props.pubs.map((pub, i) => (
+                {this.props.pubs.length > 0 ? this.props.pubs.map((pub, i) => (
                     <Fragment key={i}>
-                        <ListItem>
+                        <ListItem button onClick={() => {this.props.show(pub)}}>
                             <Avatar>
-                                <Icon style={{ fontSize: 30 }}>directions_run</Icon>
+                                <Icon style={{ fontSize: 30 }}>{this.chooseIcon(pub.distance)}</Icon>
                             </Avatar>
-                            <ListItemText primary={pub.name} secondary={'£2'} />
+                            <ListItemText primary={pub.name} secondary={`£${(pub.pricePence/100).toFixed(2)}`} />
                         </ListItem>
                         <Divider inset component="li" />
                     </Fragment>
-                ))}
+                )): <span>Loading...</span>}
             </List>
         )
     }
