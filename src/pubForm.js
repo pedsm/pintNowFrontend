@@ -36,7 +36,14 @@ export default class PubForm extends React.Component {
                 console.log(body)
                 const res = await fetch(`${host}/pubs/price`, {
                     method: "POST",
-                    body
+                    headers: {
+
+                    },
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
                 })
                 console.log(await res.json())
                 this.closeModal.bind(this)()
