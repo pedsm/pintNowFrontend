@@ -26,6 +26,7 @@ export default class CustomMap extends React.Component {
                 defaultZoom={14}
                 defaultCenter={{ lat: position.lat, lng: position.lon }}
             >
+                <Marker position={{ lat: position.lat, lng: position.lon}} icon="./images/location.png"/>
                 {pubs.map((pub, i) => {
                     const pos = pub.location.split(',').map(a => parseFloat(a))
                     const objPos = { lat: pos[0], lng: pos[1] }
