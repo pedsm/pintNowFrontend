@@ -3,6 +3,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Icon from 'material-ui/Icon';
 import Divider from 'material-ui/Divider';
+import { prettyPrice } from './utils'
 
 export default class PubList extends React.Component {
     chooseIcon(distance) {
@@ -24,7 +25,7 @@ export default class PubList extends React.Component {
                             <Avatar>
                                 <Icon style={{ fontSize: 30 }}>{this.chooseIcon(pub.distance)}</Icon>
                             </Avatar>
-                            <ListItemText primary={pub.name} secondary={pub.pricePence !== 0 ? 'Not enough data' :`£${(pub.pricePence / 100).toFixed(2)}`} />
+                            <ListItemText primary={pub.name} secondary={prettyPrice(pub.pricePence)} />
                         </ListItem>
                         <Divider inset component="li" />
                     </Fragment>

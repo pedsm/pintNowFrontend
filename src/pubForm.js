@@ -2,6 +2,7 @@ import React from 'react'
 import Dialog, {DialogTitle, DialogContent, DialogActions, DialogContentText} from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
+import { host } from './utils'
 
 export default class PubForm extends React.Component {
     constructor(props) {
@@ -24,10 +25,21 @@ export default class PubForm extends React.Component {
         }
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         if(this.state.price <= 10 && this.state.price > 0.10) {
-           this.closeModal.bind(this)()
-           // TODO perform request
+           try {
+               const res = await fetch(`${host}/pubs/price`, {
+                   method: "POST",
+                   body: {
+                       id: this.props.pub.id,
+                       price: Math.round(this.state.price * 100)
+                   }
+               })
+               console.log(await res.json())
+               this.closeModal.bind(this)()
+           } catch (e) {
+                console.error(e)
+           }
         } else {
             this.setState(prev => Object.assign(prev, { error: true }))
         }

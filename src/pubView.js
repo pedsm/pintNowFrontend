@@ -1,6 +1,7 @@
 import React from 'react'
 import Dialog, {DialogTitle, DialogContent, DialogActions, DialogContentText} from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
+import { prettyPrice } from './utils'
 
 export default class PubView extends React.Component {
     prettyDistance(distance) {
@@ -17,7 +18,7 @@ export default class PubView extends React.Component {
                 <DialogTitle id="alert-dialog-slide-title" children={pub.name} />
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Pint price: {pub.pricePence !== 0 ? 'Not enough data' :`£${(pub.pricePence / 100).toFixed(2)}`}<br />
+                        Pint price: {prettyPrice(pub.pricePence)}<br />
                         Address: {pub.address}<br />
                         Postcode: {pub.postcode}<br />
                         Distance: {this.prettyDistance(pub.distance)}<br />
