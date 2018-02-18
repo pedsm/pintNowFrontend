@@ -5,4 +5,4 @@ export function prettyPrice(prices) {
     return `£${((prices.reduce((a,b) => a + b)/prices.length)/100).toFixed(2)} for a pint`
 }
 
-export const host = `http://localhost`
+export const host = `https://pintnow.uk`
