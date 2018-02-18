@@ -8,6 +8,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu'
 import { theme } from './theme'
+import { host } from './utils'
 import Icon from 'material-ui/Icon/Icon';
 import PubView from './pubView'
 import PubForm from './pubForm'
@@ -32,10 +33,10 @@ class App extends React.Component {
         }
 
         window.addEventListener('online', () => {
-            this.setState(prev => Object.assign(prev, {online:true}))
+            this.setState(prev => Object.assign(prev, { online: true }))
         });
         window.addEventListener('offline', () => {
-            this.setState(prev => Object.assign(prev, {online:false}))
+            this.setState(prev => Object.assign(prev, { online: false }))
         });
     }
     componentDidMount() {
@@ -58,12 +59,12 @@ class App extends React.Component {
                     return state
                 })
             });
-        } 
+        }
 
     }
 
     async fetchPubs(lat, lon) {
-        const data = await fetch(`http://localhost:3000/pubs?lat=${lat}&lon=${lon}&num=${50}`)
+        const data = await fetch(`${host}/pubs?lat=${lat}&lon=${lon}&num=${50}`)
         const json = await data.json()
         this.setState((prev, props) => {
             const state = Object.assign(prev)
@@ -80,7 +81,7 @@ class App extends React.Component {
     closeForm() { this.setState(prev => Object.assign(prev, { showForm: false })) }
 
     render() {
-        if(this.state.location === false) {
+        if (this.state.location === false) {
             return (
                 <div style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
                     <AppBar position="static">

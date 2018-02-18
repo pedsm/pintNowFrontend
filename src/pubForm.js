@@ -23,23 +23,26 @@ export default class PubForm extends React.Component {
             console.log(e.target.value)
             this.setState(prev => Object.assign(prev, {price: e.target.value}))
         }
+        console.log(this.props.pub)
     }
 
     async handleSubmit(e) {
         if(this.state.price <= 10 && this.state.price > 0.10) {
            try {
-               const res = await fetch(`${host}/pubs/price`, {
-                   method: "POST",
-                   body: {
-                       id: this.props.pub.id,
-                       price: Math.round(this.state.price * 100)
-                   }
-               })
-               console.log(await res.json())
-               this.closeModal.bind(this)()
-           } catch (e) {
+                const body = {
+                    id: this.props.pub.id,
+                    price: Math.round(this.state.price * 100)
+                }
+                console.log(body)
+                const res = await fetch(`${host}/pubs/price`, {
+                    method: "POST",
+                    body
+                })
+                console.log(await res.json())
+                this.closeModal.bind(this)()
+            } catch (e) {
                 console.error(e)
-           }
+            }
         } else {
             this.setState(prev => Object.assign(prev, { error: true }))
         }
@@ -61,9 +64,9 @@ export default class PubForm extends React.Component {
                 <DialogTitle id="alert-dialog-slide-title" children={pub.name} />
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        You are submiting this pint price to <b>{pub.name}</b>. <br/>
-                        {pub.name} is {this.prettyDistance(pub.distance)} away. <br/>
-                        {this.state.error ? <span style={{color:'red'}}>The value you put in is not valid</span>: ''}
+                        You are submiting this pint price to <b>{pub.name}</b>. <br />
+                        {pub.name} is {this.prettyDistance(pub.distance)} away. <br />
+                        {this.state.error ? <span style={{ color: 'red' }}>The value you put in is not valid</span> : ''}
                     </DialogContentText>
                     <TextField
                         onChange={this.handleChange.bind(this)}
@@ -73,7 +76,7 @@ export default class PubForm extends React.Component {
                         label="Price (£)"
                         type="number"
                         fullWidth
-                        inputProps={{steps: 0.01, max: 10, min: 0.10}}
+                        inputProps={{ steps: 0.01, max: 10, min: 0.10 }}
                     />
 
                 </DialogContent>
